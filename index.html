@@ -5,20 +5,44 @@
     <meta charset="utf-8"/>
     <!--import jQuery-->
     <script
-    src="https://code.jquery.com/jquery-2.2.4.min.js"
-    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-    crossorigin="anonymous"></script>
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous">
+    </script>
 
+    <link rel="stylesheet" href="style.css"/>
     <title>Atxta's profile</title>
   </head>
   <body>
+    <canvas id="bg-net">
+      background: a beautiful net (now fallback QAQ)
+    </canvas>
     <main>
-      <div class="acloud"></div>
+      <h-u-b>
+        <p slot="title">Atxta</p>
+      </h-u-b>
     </main>
+    
+    <template id='hub'>
+      <button class="hub-btn">
+        <slot name="img"></slot>
+        <slot name="title"></slot>
+        <slot name="content"></slot>
+      </button>
+      <style>
+        .hub-btn {
+          background-color: red;
+          width: 120px;
+          height: 120px;
+          border-radius: 100%;
+        }
+      </style>
+    </template>
+    <script src="hub.js"></script>
+    <script src="net.js"></script>
     <script>
-      $(document).ready(function(){
-        $(".acloud").load("/acloud.html");
-      });
+      var cv = new net(document.getElementById('bg-net'));
+      customElements.define('h-u-b', Hub);
     </script>
   </body>
 </html>
