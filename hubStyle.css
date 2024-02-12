@@ -1,0 +1,19 @@
+* {
+  font-family: "Space Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.hub-btn {
+  background-color: transparent;
+  width: 120px;
+  height: 120px;
+  translate: -60px -60px;
+  border: 2px solid khaki;
+  border-radius: 100%;
+}
+
+::slotted(h2) {
+  font-weight: 700;
+  color: khaki;
+}

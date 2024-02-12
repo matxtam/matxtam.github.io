@@ -3,7 +3,10 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <!--import jQuery-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+      <!--import jQuery-->
     <script
       src="https://code.jquery.com/jquery-2.2.4.min.js"
       integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -18,31 +21,38 @@
       background: a beautiful net (now fallback QAQ)
     </canvas>
     <main>
-      <h-u-b>
-        <p slot="title">Atxta</p>
-      </h-u-b>
+      <gso-sat data-x='0' data-y='0'>
+        <h2 slot="title">Atxta</h2>
+      </gso-sat>
+      <gso-sat data-x="200" data-y="0">
+        <h2 slot="title">major</h2>
+      </gso-sat>
+      <gso-sat data-x="-220" data-y="10">
+        <h2 slot="title">works</h2>
+      </gso-sat>
+      <gso-sat data-x="170" data-y="110">
+        <h2 slot="title">belief</h2>
+      </gso-sat>
+      <gso-sat data-x="-190" data-y="-100">
+        <h2 slot="title">(hobbies)</h2>
+      </gso-sat>
     </main>
     
-    <template id='hub'>
+    <template id='hub-template'>
       <button class="hub-btn">
-        <slot name="img"></slot>
         <slot name="title"></slot>
         <slot name="content"></slot>
       </button>
-      <style>
-        .hub-btn {
-          background-color: red;
-          width: 120px;
-          height: 120px;
-          border-radius: 100%;
-        }
-      </style>
     </template>
     <script src="hub.js"></script>
     <script src="net.js"></script>
     <script>
       var cv = new net(document.getElementById('bg-net'));
-      customElements.define('h-u-b', Hub);
+      customElements.define('gso-sat', Hub); //hub: define custom element
+      const gsoSats = document.querySelectorAll("gso-sat");
+      gsoSats.forEach(sat => {
+        cv.appendGss({x:parseInt(sat.dataset.x), y:parseInt(sat.dataset.y)});
+      })
     </script>
   </body>
 </html>
