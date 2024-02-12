@@ -13,7 +13,7 @@
       crossorigin="anonymous">
     </script>
 
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="styles/style.css"/>
     <title>Atxta's profile</title>
   </head>
   <body>
@@ -21,19 +21,19 @@
       background: a beautiful net (now fallback QAQ)
     </canvas>
     <main>
-      <gso-sat data-x='0' data-y='0'>
+      <gso-sat data-deg="612">
         <h2 slot="title">Atxta</h2>
       </gso-sat>
-      <gso-sat data-x="200" data-y="0">
+      <gso-sat data-deg="180">
         <h2 slot="title">major</h2>
       </gso-sat>
-      <gso-sat data-x="-220" data-y="10">
+      <gso-sat data-deg="0">
         <h2 slot="title">works</h2>
       </gso-sat>
-      <gso-sat data-x="170" data-y="110">
+      <gso-sat data-deg="30">
         <h2 slot="title">belief</h2>
       </gso-sat>
-      <gso-sat data-x="-190" data-y="-100">
+      <gso-sat data-deg="210">
         <h2 slot="title">(hobbies)</h2>
       </gso-sat>
     </main>
@@ -44,15 +44,9 @@
         <slot name="content"></slot>
       </button>
     </template>
-    <script src="hub.js"></script>
-    <script src="net.js"></script>
-    <script>
-      var cv = new net(document.getElementById('bg-net'));
-      customElements.define('gso-sat', Hub); //hub: define custom element
-      const gsoSats = document.querySelectorAll("gso-sat");
-      gsoSats.forEach(sat => {
-        cv.appendGss({x:parseInt(sat.dataset.x), y:parseInt(sat.dataset.y)});
-      })
-    </script>
+    <script src="src/phy.js"></script>
+    <script src="src/hub.js"></script>
+    <script src="src/net.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>

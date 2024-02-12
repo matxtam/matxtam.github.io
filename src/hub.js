@@ -12,7 +12,7 @@ class Hub extends HTMLElement{
     // link stylesheet
     const styleLink = document.createElement("link");
     styleLink.setAttribute("rel", "stylesheet");
-    styleLink.setAttribute("href", "hubStyle.css");
+    styleLink.setAttribute("href", "styles/hubStyle.css");
     shadowRoot.appendChild(styleLink);
 
     const btn = shadowRoot.querySelector(".hub-btn");
@@ -21,13 +21,14 @@ class Hub extends HTMLElement{
     this.setPosition();
   }
   setPosition() {
-    const center = {x: window.innerWidth/2, y: window.innerHeight/2}
-    const x = parseInt(this.dataset.x);
-    const y = parseInt(this.dataset.y);
+    const deg = parseInt(this.dataset.deg);
+    const x = gso_x(deg);
+    const y = gso_y(deg);
     this.style.setProperty("position", "absolute");
-    this.style.setProperty("left", `${center.x + x}px`);
-    this.style.setProperty("top", `${center.y + y}px`);
+    this.style.setProperty("left", `${x}px`);
+    this.style.setProperty("top", `${y}px`);
   }
   
 }
 
+// export default class Hub;
