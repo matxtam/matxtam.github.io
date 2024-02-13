@@ -3,24 +3,31 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-      <!--import jQuery-->
+
+    <!--import jQuery...not using now
     <script
       src="https://code.jquery.com/jquery-2.2.4.min.js"
       integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
       crossorigin="anonymous">
-    </script>
+    </script>-->
 
-    <link rel="stylesheet" href="styles/style.css"/>
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <link href="styles/style.css" rel="stylesheet"/>
+    
     <title>Atxta's profile</title>
+    
   </head>
   <body>
     <canvas id="bg-net">
-      background: a beautiful net (now fallback QAQ)
+      background: a beautiful net (this is fallback text)
     </canvas>
+    
     <main>
+      <button id="overview" hidden>overview</button>
       <gso-sat data-deg="612">
         <h2 slot="title">Atxta</h2>
       </gso-sat>
@@ -41,12 +48,14 @@
     <template id='hub-template'>
       <button class="hub-btn">
         <slot name="title"></slot>
-        <slot name="content"></slot>
       </button>
+      <slot name="content"></slot>
     </template>
+
     <script src="src/phy.js"></script>
-    <script src="src/hub.js"></script>
     <script src="src/net.js"></script>
+    <script src="src/hub.js"></script>
     <script src="main.js"></script>
+
   </body>
 </html>

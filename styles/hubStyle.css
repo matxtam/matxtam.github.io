@@ -4,7 +4,7 @@
   font-style: normal;
 }
 
-.hub-btn {
+button {
   background-color: transparent;
   width: 120px;
   height: 120px;
@@ -15,5 +15,16 @@
 
 ::slotted(h2) {
   font-weight: 700;
+  text-align: center;
   color: khaki;
+  user-select: none;
+}
+
+::slotted(h2.listed) {
+  translate: 60px;
+}
+
+::slotted(h2.detail) {
+  font-weight: 400;
+  color: chocolate;
 }

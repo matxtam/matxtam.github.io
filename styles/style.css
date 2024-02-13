@@ -10,7 +10,32 @@ html, body {
   background-color: black;
 }
 
+main {
+  position: relative;
+  z-index: 4;
+}
+
 #bg-net {
   border-style: solid;
   position: fixed;
+  z-index: 1;
+}
+
+#overview {
+  background-color: transparent;
+  color: khaki;
+  border: 1px solid;
+  height: 120px;
+  width: 120px;
+  /* z-index: 3; */
+  user-select: none;
+}
+
+button:hover {
+  background-color: indigo;
+}
+
+gso-sat {
+  position: absolute;
+  background-color: transparent;
 }

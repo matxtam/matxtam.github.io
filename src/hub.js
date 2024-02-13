@@ -1,3 +1,10 @@
+/**
+ * Hub: a class for building custom element "gso-sat"
+ * els: a satellite, its title and description
+ * purp: change style while attr "state" changes
+ * tech: Web Components
+ */
+
 class Hub extends HTMLElement{
   constructor(){
     super();
@@ -15,20 +22,24 @@ class Hub extends HTMLElement{
     styleLink.setAttribute("href", "styles/hubStyle.css");
     shadowRoot.appendChild(styleLink);
 
-    const btn = shadowRoot.querySelector(".hub-btn");
-    btn.addEventListener("click", () => console.log("clicked"));
+    // redefine click event
+    const clickSat = new CustomEvent("click-sat");
+    const Btn = shadowRoot.querySelector("button");
+    Btn.addEventListener("click", () => {
+      this.dispatchEvent(clickSat);
+    });
+  }
 
-    this.setPosition();
+  //main purp: change style with "state" attr
+  static observedAttributes = ["state"];
+  attributeChangedCallback(name, oldValue, newValue) {
+    if(name === "state"){
+      if(newValue !== "overview" && newValue !== "listed" && newValue !== "detail" ){
+        console.error("state value not valid");
+      }
+      this.querySelector("h2").setAttribute("class", newValue);
+    }
   }
-  setPosition() {
-    const deg = parseInt(this.dataset.deg);
-    const x = gso_x(deg);
-    const y = gso_y(deg);
-    this.style.setProperty("position", "absolute");
-    this.style.setProperty("left", `${x}px`);
-    this.style.setProperty("top", `${y}px`);
-  }
-  
 }
 
 // export default class Hub;

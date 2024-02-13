@@ -1,3 +1,16 @@
+/**
+ * phy: a math lib that calculate the whole planet and satellite sys
+ * purp: building up a virtual gravitational sys
+ * tech: pure math and phys
+ * 
+ * Terminology:
+ * planet == 612 == the fake gss at the center
+ * sat == satellites == nodes
+ * gso == geosynchronous orbit
+ * gss == gsosat == geosynchronous sat
+ * gssNode == planet || gss
+ */
+
 const center = {x:window.innerWidth/2, y:window.innerHeight/2}
 const GM = 500;
 const dt = 0.1;
@@ -19,31 +32,32 @@ class sat {
       y: v * Math.cos(rad) *   dir ,
     }
   }
+
   p2c({r, rad}) {
     const x = center.x + r * Math.cos(rad);
     const y = center.y + r * Math.sin(rad);
     return ({x, y});
   }
+  
   sqrDist(node) {
     const dx = node.x - this.x;
     const dy = node.y - this.y;
     return (dx * dx + dy * dy);
   }
+
   move() {
     const dx = this.x - center.x;
     const dy = this.y - center.y;
     const da_r = GM / Math.pow(dx * dx + dy * dy, 1.5)
     this.x = this.x + this.v.x * dt;
     this.y = this.y + this.v.y * dt;
-    // node.v_x = node.v_x + (this.center.x - node.x) * da_r * dt;
-    // node.v_y = node.v_y + (this.center.y - node.y) * da_r * dt;
     this.v.x = this.v.x + (center.x - this.x) * da_r * dt;
     this.v.y = this.v.y + (center.y - this.y) * da_r * dt;
   }
 }
 
 class gsoSat {
-  constructor(deg, type) {
+  constructor(deg) {
     this.x = center.x + r_gso * Math.cos(deg * Math.PI / 180);
     this.y = center.y + r_gso * Math.sin(deg * Math.PI / 180);
   }
