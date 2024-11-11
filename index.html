@@ -27,22 +27,30 @@
     </canvas>
     
     <main>
-      <button id="overview" hidden>overview</button>
-      <gso-sat data-deg="612">
-        <h2 slot="title">Atxta</h2>
-      </gso-sat>
-      <gso-sat data-deg="180">
-        <h2 slot="title">major</h2>
-      </gso-sat>
-      <gso-sat data-deg="0">
-        <h2 slot="title">works</h2>
-      </gso-sat>
-      <gso-sat data-deg="30">
-        <h2 slot="title">belief</h2>
-      </gso-sat>
-      <gso-sat data-deg="210">
-        <h2 slot="title">(hobbies)</h2>
-      </gso-sat>
+      <button id="overview" hidden>
+        overview
+        <p>>></p>
+      </button>
+      <div id="sats">
+        <gso-sat data-deg="612">
+          <h2 slot="title">Name</h2>
+          <article slot="content">
+            我誰！
+          </article>
+        </gso-sat>
+        <gso-sat data-deg="180">
+          <h2 slot="title">major</h2>
+        </gso-sat>
+        <gso-sat data-deg="0">
+          <h2 slot="title">works</h2>
+        </gso-sat>
+        <gso-sat data-deg="30">
+          <h2 slot="title">belief</h2>
+        </gso-sat>
+        <gso-sat data-deg="210">
+          <h2 slot="title">(hobbies)</h2>
+        </gso-sat>
+      </div>
     </main>
     
     <template id='hub-template'>

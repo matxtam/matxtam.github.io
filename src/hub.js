@@ -37,7 +37,9 @@ class Hub extends HTMLElement{
       if(newValue !== "overview" && newValue !== "listed" && newValue !== "detail" ){
         console.error("state value not valid");
       }
-      this.querySelector("h2").setAttribute("class", newValue);
+      const btn = this.shadowRoot.querySelector("button");
+      btn.setAttribute("class", newValue);
+      this.querySelectorAll("*").forEach(el => el.setAttribute("class", newValue));
     }
   }
 }
