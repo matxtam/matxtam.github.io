@@ -1,8 +1,64 @@
+:root {
+	--overview-btn-size: 150px;
+	--listed-btn-size: 100px;
+	--detail-btn-size: 10em;
+	--list-width: 5em;
+}
+
+@keyframes swing {
+  from {transform: translate(0em);}
+  50% { transform: translate(1em);}
+  to {transform: translate(0em);}
+}
+
+@keyframes pushedIn {
+	from {transform: translate(-50%, 0);}
+	50% {transform: translate(-90%, 0);}
+	to {transform: translate(-80%, 0);}
+}
+
+@keyframes transOut {
+	from {
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+	to {
+		transform: translate(-10%, 0);
+		opacity: 0;
+	}
+}
+
+@keyframes transIn {
+	from {
+		transform: translate(-10%, 0);
+		opacity: 0;
+	}
+	to {
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes articleIn {
+	from {
+		transform: translate(10em, 0);
+		opacity: 0;
+	}
+	to {
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+}	
+
 * {
   font-family: "Space Mono", monospace;
   font-weight: 400;
   font-style: normal;
   color: khaki;
+}
+
+b {
+	font-weight: 700;
 }
 
 html, body{
@@ -13,25 +69,44 @@ html, body{
   position: relative;
   background-color: black;
   overflow: hidden;
+	opacity: 1;
 }
+
 
 main {
   position: relative;
   height: 100%;
   width: 100%;
-  z-index: 4;
+	z-index: 4;
+}
+
+main.transOut {
+	animation: transOut 0.5s ease forwards;
+	z-index: 4;
+}
+
+main.transIn {
+	animation: transIn 0.5s ease forwards;
+	z-index: 4;
 }
 
 #bg-net {
-  
   position: fixed;
   z-index: 1;
+}
+
+#sats {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: flex-basis 500ms;
 }
 
 #overview {
   position: absolute;
   right: 6rem;
-  bottom: 10%;
+  bottom: 5%;
   background-color: transparent;
   color: khaki;
   border: 0px solid;
@@ -47,15 +122,10 @@ main {
   text-decoration-line: underline;
 }
 
-@keyframes swing {
-  from {translate: 0em;}
-  50% { translate: 1em;}
-  to {translate: 0em;}
-}
-
 #overview p{
   display: inline-block
 }
+
 #overview:hover p{
   font-weight: 700;
   animation-name: swing;
@@ -67,31 +137,168 @@ gso-sat {
   position: absolute;
   background-color: transparent;
   z-index: 2;
-  transition: top 0.5s, left 0.5s;
 }
 
 gso-sat[state="listed"]{
   position: static;
   display: flex;
+	left: 0 !important;
+	top: 0 !important;
 }
 
 gso-sat[state="detail"]{
-  height: 100%;
-  width: 100%;
-  padding: 2em 6em;
-  box-sizing: border-box;
-}
+	left: var(--list-width) !important;
+	top: 0 !important;
 
-#sats {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  transition: flex-basis 500ms;
+  width: calc(100% - var(--list-width));
+  padding: 2em 4em;
+  box-sizing: border-box;
+
+	display: flex;
+	flex-direction: row;
+	gap: 3em;
+	justify-content: center;
+	overflow: hidden;
 }
 
 #stone {
   position: static;
-  width: 100px;
-  height: 50px;
+  width: var(--listed-btn-size);
+  height: var(--listed-btn-size);
+	background-color: khaki;
+	border-radius: 100%;
+	animation: pushedIn 0.5s cubic-bezier(0.5, 0, 0.5, 1) forwards;
+}
+
+article {
+	display: none;
+}
+
+/* the slotted can't be styled inside the dom's style sheet */
+article.detail {
+	height: 100%;
+	min-height: 50%;
+	width: 100%;
+
+	overflow-x: hidden;
+	overflow-y: hidden;
+
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+
+	animation: articleIn 0.5s ease forwards;
+}
+
+article a {
+	color: black;
+	font-weight: 700;
+}
+
+h3 {
+	font-weight: 700;
+}
+
+#contact-links {
+	padding: 3em;
+	display: flex;
+	flex-flow: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 1em;
+}
+
+#contact-links img {
+	height: 1.5em;
+	object-fit: contain;
+}
+
+#contact-links a {
+	padding: .5em .8em;
+	background-color: khaki;
+	border-radius: 0.3em;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	opacity: .8;
+	transition: 0.2s ease;
+}
+
+#contact-links a:hover {
+	opacity: 1;
+}
+
+@media (orientation: portrait) {
+	:root {
+		--listed-btn-size: 100px;
+		--detail-btn-size: 7em;
+		--list-width: 5em;
+	}
+
+	#bg-net {
+		transform: rotate(90deg);
+	}
+
+	#sats {
+		justify-content: start;
+	}
+
+	#sats:has(gso-sat[state="overview"]) {
+		transform: rotate(90deg);
+	}
+
+	#overview {
+		position: absolute;
+		right: 6rem;
+		top: initial;
+		bottom: 5%;
+	}
+
+	gso-sat[state="detail"] {
+		left: var(--list-width) !important;
+		flex-direction: column;
+	}
+
+	h2.overview {
+		transform: rotate(-90deg);
+	}
+
+	h2.listed {
+		transform: rotate(-45deg) translate(50%, 50%);
+	}
+
+	article.detail {
+		height: 50%;
+		justify-content: start;
+	}
+
+}
+
+@media only screen and (max-width: 430px) {
+	:root {
+		--overview-btn-size: 70px;
+		--listed-btn-size: 60px;
+		--detail-btn-size: 5em;
+		--list-width: 5em;
+	}
+
+	gso-sat[state="detail"]{
+		padding: 0 1em;
+		font-size: small;
+	}
+
+	article.detail {
+		overflow-y: scroll;
+	}
+	#overview {
+		bottom: 0;
+	}
+
+	h2 {
+		font-size: 1em;
+	}
+
 }

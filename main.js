@@ -6,62 +6,101 @@
 // import net from "./src/net.js";
 // import Hub from "./src/hub.js";
 
+// build background: the net
 let net = new Net(document.getElementById('bg-net'));
 customElements.define('gso-sat', Hub); //hub: define custom element
 
+// build endpoints of key elements: gsoSats and overview btn
 const gsoSats = document.querySelectorAll("gso-sat");
 const overview = document.getElementById("overview");
 
+// overview: things to do on click
+// "detail", "listed" -> "overview"
 overview.addEventListener("click", () => {
-  overview.setAttribute("hidden", "");
-  gsoSats.forEach(sat => {
-    const deg = parseInt(sat.dataset.deg)
-    const x = gso_x(deg);
-    const y = gso_y(deg);
-    sat.style.setProperty("left", `${x}px`);
-    sat.style.setProperty("top", `${y}px`)
-    sat.setAttribute("state", "overview")
-  });
+	const mains = document.getElementsByTagName("main");
+	console.log(mains);
+	mains[0].classList.add("transOut");
+	setTimeout(() => {
+		mains[0].classList.remove("transOut"); //stop fadeout animation
+		mains[0].classList.add("transIn");
+		overview.setAttribute("hidden", ""); // hide "overview" button
+		const existedStone = document.getElementById("stone"); // remove stone
+		if(existedStone) existedStone.remove();
+		gsoSats.forEach(sat => { // place sats
+			const deg = parseInt(sat.dataset.deg)
+			const x = gso_x(deg);
+			const y = gso_y(deg);
+			sat.style.setProperty("left", `${x}px`);
+			sat.style.setProperty("top", `${y}px`)
+			sat.setAttribute("state", "overview")
+		});
+	}, 800);
 })
 
+// gsoSats
 gsoSats.forEach((sat, idx) => {
   const deg = parseInt(sat.dataset.deg)
 
-  // append to net
+	// Initialization: build net
   if(deg === 612) net.appendPlanet();
   else net.appendGss(deg);
 
-  // set position
+  // Initialization: set position
   const x = gso_x(deg);
   const y = gso_y(deg);
   sat.style.setProperty("left", `${x}px`);
   sat.style.setProperty("top", `${y}px`)
 
-  // handle clicking
+	// Initialization: state
   sat.setAttribute("state", "overview");
+
+	// Initialization: the "stone" (a fake element for listed sats)
   const stone = document.createElement("div");
   stone.setAttribute("id", "stone")
+
+  // things to do on click
   sat.addEventListener("click-sat", () => {
     const oldState = sat.getAttribute("state");
-    if(oldState !== "detail"){
+
+		// "overview" -> "detail"
+    if(oldState === "overview"){
+			const mains = document.getElementsByTagName("main");
+			mains[0].classList.remove("transIn");
+			mains[0].classList.add("transOut");
+			setTimeout(() => {
+				mains[0].classList.remove("transOut");
+				// renew all sat's states and position
+				gsoSats.forEach((tas, xdi) => {
+					if(idx === xdi){
+						tas.setAttribute("state", "detail");
+						tas.insertAdjacentElement("afterend", stone);
+					}
+					else {
+						tas.setAttribute("state", "listed");
+					}
+				})
+      	overview.removeAttribute("hidden");
+			}, 800);
+    }
+
+		// "listed" -> "detail"
+    if(oldState === "listed"){
+			// remove stone
       const existedStone = document.getElementById("stone");
       if(existedStone) existedStone.remove();
+			// renew all sat's states and position
       gsoSats.forEach((tas, xdi) => {
         if(idx === xdi){
           tas.setAttribute("state", "detail");
-          tas.style.setProperty("left", "10em");
-          tas.style.setProperty("top", "0");
           tas.insertAdjacentElement("afterend", stone);
         }
         else {
           tas.setAttribute("state", "listed");
-          tas.style.setProperty("left", "0");
-          tas.style.setProperty("top", "0");
         }
       })
     }
-    if(oldState === "overview"){
-      overview.removeAttribute("hidden");
-    }
+
   })
 })
+
+

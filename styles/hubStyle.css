@@ -1,8 +1,25 @@
+@keyframes spinY{
+	from {
+		transform: rotateY(180deg);
+		opacity: 0;
+	}
+	to {
+		transform: rotateY(360deg);
+		opacity: 1;
+	}
+}
+
+@keyframes popOut {
+	from {transform: translate(-80%, 0); }
+	to { transform: translate(-50%, 0); }
+}
+
 * {
   font-family: "Space Mono", monospace;
   font-weight: 400;
   font-style: normal;
 }
+
 
 :host {
   display: flex;
@@ -16,48 +33,49 @@
   text-align: center;
   box-sizing: border-box;
   user-select: none;
+	display: block;
 }
 
 ::slotted(h2.listed) {
-  translate: 50px;
+	background-color: black;
+  transform: translate(calc(var(--listed-btn-size) / 2), 0);
 }
 
 button {
   background-color: transparent;
-  width: 120px;
-  height: 120px;
-  translate: -60px -60px;
+  width: var(--overview-btn-size);
+  height: var(--overview-btn-size);
   border: 2px solid khaki;
   border-radius: 100%;
   transition: background-color 0.3s;
 }
 
-button:hover {
+button.overview {
+	transform: translate(-50%, -50%);
+}
+
+button.overview:hover {
   background-color: rgba(195, 176, 145, .3);
 }
 
 button.listed {
-  width: 100px;
-  height: 100px;
-  translate: -50px 0;
-  border-radius: 0 100% 100% 0;
+  width: var(--listed-btn-size);
+  height: var(--listed-btn-size);
+	transform: translate(-50%, 0);
+	animation: popOut 0.5s ease none;
+}
+
+button.listed:hover {
+	transform: translate(-55%, 0);
+	transition: 0.1s;
 }
 
 button.detail {
-  width: 10em;
-  height: 10em;
+  width: var(--detail-btn-size);
+	min-width: var(--detail-btn-size);
+  height: var(--detail-btn-size);
+	min-height: var(--detail-btn-size);
   font-weight: 400;
   font-size: 2em;
-  color: chocolate;
-
-  transition: width 0.5s, height 0.5s, left 0.5s;
-}
-
-::slotted(article) {
-  visibility: hidden;
-}
-
-::slotted(article.detail) {
-  visibility: visible;
-  translate: -10em;
+	animation: spinY 0.5s ease-out forwards;
 }

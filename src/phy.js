@@ -14,7 +14,7 @@
 const center = {x:window.innerWidth/2, y:window.innerHeight/2}
 const GM = 500;
 const dt = 0.1;
-const r_gso = center.y - 50;
+const r_gso = (center.x > center.y) ? (center.y - 50) : center.x - 50;
 const r_max = Math.min(window.innerWidth, window.innerHeight)/3.5
 const r_void = 0.6;
 
