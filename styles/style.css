@@ -300,5 +300,8 @@ h3 {
 	h2 {
 		font-size: 1em;
 	}
+	#overview {
+		font-size: small;
+	}
 
 }
