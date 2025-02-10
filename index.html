@@ -32,23 +32,54 @@
         overview
         <p>>></p>
       </button>
+
+			<button id="toggleLang" class="en">
+				<div></div>
+				<p>en</p>
+				<p></p>
+				<p>中</p>
+			</button>
+
       <div id="sats">
 
         <gso-sat data-deg="612">
-          <h2 slot="title">About</h2>
+					<h2 slot="title" data-en="About" data-zh="關於我"></h2>
           <article slot="content">
-						<p> Hi, I'm <b>謝函蓁 (pronounced "Hsieh Han Chen")</b>,
-						<br>or you can call me <b>Heather</b>. </p>
-						<h3>Education</h3>
+						<p
+						data-en="Hi, I'm Han-Chen Hsieh, or you can call me Heather. "
+						data-zh="嗨，我是謝函蓁:)"
+						></p>
+						<h3
+							data-en="Education"
+							data-zh="學歷"
+							></h3>
 						<ul>
-							<li>[Studying] Electrical Engineering at National Taiwan University </li>
-							<li>精誠(Ching Cheng) High School, 2022</li>
+							<li
+								data-en="[Studying] Electrical Engineering at National Taiwan University"
+							 	data-zh="[在學中]台灣大學電機系"
+								></li>
+							<li
+								data-en="Ching Cheng High School, 2022"
+								data-zh="精誠高中, 2022"
+								></li>
 						</ul>
-						<h3>Passions</h3>
+						<h3
+							data-en="Passions"
+							data-zh="興趣領域"
+							></h3>
 						<ul>
-							<li>Web development</li>
-							<li>Internet of Things (IoT)</li>
-							<li>Embeded System</li>
+							<li
+								data-en="Web development"
+								data-zh="網頁開發"
+								></li>
+							<li
+								data-en="Internet of Things (IoT)"
+								data-zh="物聯網"
+								></li>
+							<li
+								data-en="Embeded System"
+								data-zh="嵌入式系統"
+								></li>
 						</ul>
           </article>
         </gso-sat>
@@ -113,7 +144,9 @@
         </gso-sat>
 
         <gso-sat data-deg="40">
-          <h2 slot="title">Hobbies</h2>
+          <h2 slot="title"
+						data-en="Fun Facts"
+						data-zh="軼事"></h2>
 					<article slot="content">
 						<h3>Writing</h3> 
 						<p>I love writing diaries. They are helpful to comb thoughts, grow thoughts, and relax. I dream to become a writer when I retire :)</p>
@@ -130,7 +163,10 @@
         </gso-sat>
 
         <gso-sat data-deg="220">
-          <h2 slot="title">Contact</h2>
+          <h2 slot="title"
+						data-en="Contact"
+						data-zh="聯絡我"
+						></h2>
 					<article slot="content">
 						<div id="contact-links">
 							<a target="_blank" href="https://github.com/matxtam">

@@ -103,4 +103,17 @@ gsoSats.forEach((sat, idx) => {
   })
 })
 
+// language toggle
+let currentLang = "en";  // Default language
+document.querySelectorAll("[data-en]").forEach(element => {
+	element.innerText = element.getAttribute("data-" + currentLang);
+});
+document.getElementById("toggleLang").addEventListener("click", function() {
+	currentLang = currentLang === "en" ? "zh" : "en"; // Toggle language
+	document.querySelectorAll("[data-en]").forEach(element => {
+		element.innerText = element.getAttribute("data-" + currentLang);
+	});
 
+	this.classList.toggle("en");
+	this.classList.toggle("zh");
+});
