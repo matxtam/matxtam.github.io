@@ -1,0 +1,51 @@
+.timeline {
+  box-sizing: border-box;
+  margin-left: 10px;
+  border: solid khaki;
+  border-width: 0 0 0 3px; 
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timeline p{
+  position: relative;
+  box-sizing: border-box;
+  left: 20px;
+  padding: 5px 10px;
+  background: khaki;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: all 0.2s ease-out;
+}
+
+/* The circle */
+.timeline p::after{
+  content: '';
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  left: -29px;
+  top: 5px;
+  background-color: khaki;
+  border: solid black 2px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* the arrow*/
+.timeline p::before{
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 6.5px;
+  left: -8px;
+  width: 0;
+  z-index: 1;
+  border: medium solid khaki;
+  border-width: 6px 8px 6px 0;
+  border-color: transparent khaki transparent transparent;
+}
+

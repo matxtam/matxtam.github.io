@@ -39,7 +39,8 @@ class Hub extends HTMLElement{
       }
       const btn = this.shadowRoot.querySelector("button");
       btn.setAttribute("class", newValue);
-      this.querySelectorAll("*").forEach(el => el.setAttribute("class", newValue));
+      
+      Array.from(this.children).forEach(el => el.setAttribute("class", newValue));
     }
   }
 }
